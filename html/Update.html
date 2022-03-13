@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- META DATA -->
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+		
+		<!-- FAVICON -->
+		<link rel="shortcut icon" type="image/png" href="../assets/css/images/logo/logovlix2.png" />
+
+		<!-- TITLE -->
+		<title>Vlix – FHIR CRUD - Update</title>
+
+		<!-- STYLE CSS -->
+		<link href="../assets/css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!-- HEADER -->
+		<header class="site-header">
+			<div class="inner-wrap">
+				<div class="navbar-brand-wpz">
+					<font size="10">FHIR CRUD</font>
+				</div>
+			</div>
+				
+			<nav class="main-navbar" role="navigation" style="">
+				<div class="inner-wrap">
+					<div id="navbar-main">
+						<div class="menu-main-container">
+							<ul id="menu-main-1" class="navbar-wpz dropdown sf-menu sf-js-enabled sf-arrows">
+								<li><a href="Create.html">Create</a></li>
+								<li><a href="Read.html">Read</a></li>
+								<li class="current-menu-item"><a href="Update.html">Update</a></li>
+								<li><a href="Delete.html">Delete</a></li>
+							</ul>
+						</div>
+						
+					</div><!-- #navbar-main -->
+				</div><!-- ./inner-wrap -->
+			</nav>
+		</header>
+		<!-- End HEADER -->
+		
+		<!-- CONTENT -->
+		<table>
+			 <colgroup>
+				<col class="three" />
+				<col class="seven" />
+			</colgroup>
+			<tr>
+				<td>FHIR Server URL<br>
+					<input id="FHIRServer" class="form-control mb-4" type="text">
+				</td>
+				<td rowspan="4">
+					Content
+					<textarea id="resourceContent" required placeholder="Textarea" rows="15"></textarea><br>
+					<button onclick="submitForm()">Submit</button>
+				</td>
+			</tr>			
+			<tr>			
+				<td>
+					Resource Type<br>
+					<select id="resourceType" data-bs-placeholder="Select Resource Type"></select>
+				</td>
+			</tr>			
+			<tr>			
+				<td>ID<br>
+					<input id="resourceID" type="text">
+				</td>
+			</tr>			
+			<tr>			
+				<td>Content Format<br>
+					<input type="radio" name="content-type" value="json" checked>
+						<span>JSON</span>
+					<input type="radio" name="content-type" value="xml">
+						<span>XML</span>
+				</td>
+			</tr>
+		</table>				
+		<!-- END CONTENT -->
+		
+		<!-- JQUERY JS-->
+		<script src="../assets/js/jquery.min.js"></script>
+		
+		<!-- HTTPRequest JS-->
+		<script src="../assets/js/HTTPRequest.js"></script>
+		
+		<!-- Setting JS-->
+		<script src="../assets/js/setting.js"></script>
+		
+		<script>
+		function submitForm() {
+			FHIRURL = document.getElementById("FHIRServer").value;
+			var ddl= document.getElementById("resourceType");
+			var resourceType= ddl.options[ddl.selectedIndex].text;
+			var resourceID= document.getElementById("resourceID").value;
+			var resourceContent= document.getElementById("resourceContent").value;
+			ResponseType= document.querySelector('input[name="content-type"]:checked').value;
+			
+			putResource(FHIRURL, resourceType, "/" + resourceID, ResponseType, "retValue", resourceContent);
+		}
+		</script>
+	</body>
+</html>
