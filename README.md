@@ -1,5 +1,5 @@
 # FHIR CRUD Operations
-###### tags: `fhir-project` `CRUD`
+###### tags: `fhir` `fhir-project` `CRUD` `XMLHttpRequest` `HTTP POST` `HTTP PUT` `HTTP GET` `HTTP DELETE`
 
 ## Introduction
 
