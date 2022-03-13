@@ -10,6 +10,26 @@ I’m going to share a step-by-step how this system works:
 * Developer: How to use Javascript XMLHttpRequest to perform FHIR CRUD Operations ([Source Code](https://github.com/victoriatjia/FHIR_CRUD))
 
 -----------------------------
+## User Version
+### FHIR Create
+E.g. Create a FHIR Person
+![](https://i.imgur.com/yh8c3kJ.gif)
+
+
+### FHIR READ
+E.g. Read FHIR Person we create on the previous step
+![](https://i.imgur.com/2LHXbM3.gif)
+
+
+### FHIR UPDATE
+E.g. Update FHIR Person we create on the previous step by changing its name from "Victoria" into "Victoria Tjia"
+![](https://i.imgur.com/BKr0CWb.gif)
+
+### FHIR DELETE
+E.g. Delete FHIR Person we create on the previous step
+![](https://i.imgur.com/3qupdW0.gif)
+
+
 ## Developer Version
 ### The XMLHttpRequest Object
 The XMLHttpRequest object can be used to exchange data with a server behind the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.
