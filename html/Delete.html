@@ -52,11 +52,6 @@
 				<td>FHIR Server URL<br>
 					<input id="FHIRServer" class="form-control mb-4" type="text">
 				</td>
-				<td rowspan="4">
-					Content
-					<textarea id="resourceContent" required placeholder="Textarea" rows="15"></textarea><br>
-					<button onclick="submitForm()">Submit</button>
-				</td>
 			</tr>			
 			<tr>			
 				<td>
@@ -69,6 +64,11 @@
 					<input id="resourceID" type="text">
 				</td>
 			</tr>	
+			<tr>
+				<td rowspan="4">
+					<button onclick="submitForm()">Submit</button>
+				</td>
+			</tr>
 		</table>				
 		<!-- END CONTENT -->
 		
