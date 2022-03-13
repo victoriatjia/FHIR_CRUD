@@ -22,8 +22,7 @@ The XMLHttpRequest object can be used to exchange data with a server behind the 
 | open(_method,url,async,user,psw_) | Specifies the request <br> _method_: the request type (**GET/POST/PUT/DELETE**) <br>_url_: the file location <br>_async_: true (asynchronous) or false (synchronous)   <br>_user_: optional user name <br>_psw_: optional password
 | send() | Sends the request to the server (Used for **GET** and **DELETE** requests) |
 | send(_string_) | Sends the request to the server (Used for **POST** and **PUT** requests) | 
-setRequestHeader(header, value) | Adds HTTP headers to the request    <br>_header_: specifies the header name  <br>_value_: specifies the header value
- |
+setRequestHeader(header, value) | Adds HTTP headers to the request    <br>_header_: specifies the header name  <br>_value_: specifies the header value|
 
 ### XMLHttpRequest Object Properties
 
@@ -80,10 +79,10 @@ function postResource(URL, ResourceName, Parameter, ResponseType, AfterFun, Requ
 }
 ```
 Description:
-> **Line 2**: Define a FHIR URL with format: [FHIR Server URL]/[ResourceType]/[Parameter]
-> **Line 5**: For the header request, we usually only define the "ContentType" header, the value is requested as we need, it can be "json" or "xml"
-> **Line 7-8**: When request complete (readyState=4 and status=200), then we obtain the response value (this.response) and store it into variable "str"
-> **Line 9**: Next we will continue by performing the next function we want using the "eval" function along by passing the "str" variable. Eval function is used to convert string to JavaScript function code for execution. It will take the string variable called "AfterFun" and see it as a function instead of a string.
+> **Line 2**: Define a FHIR URL with format: [FHIR Server URL]/[ResourceType]/[Parameter] <br>
+> **Line 5**: For the header request, we usually only define the "ContentType" header, the value is requested as we need, it can be "json" or "xml" <br>
+> **Line 7-8**: When request complete (readyState=4 and status=200), then we obtain the response value (this.response) and store it into variable "str" <br>
+> **Line 9**: Next we will continue by performing the next function we want using the "eval" function along by passing the "str" variable. Eval function is used to convert string to JavaScript function code for execution. It will take the string variable called "AfterFun" and see it as a function instead of a string <br>
 > **Line 12-13**: If the request is failed (readyState=4 and status!=200), we will continue perform "retValue" function for alert some message box so the user aware of current situation. 
 
 
