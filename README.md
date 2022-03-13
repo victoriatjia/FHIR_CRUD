@@ -1,9 +1,6 @@
 # FHIR CRUD Operations
 ###### tags: `fhir-project` `CRUD`
 
-## Table of Contents
-[TOC]
-
 ## Introduction
 
 This page outlines how to use the FHIR Endpoint to perform basic CRUD (Create/Read/Update/Delete) Operations.
