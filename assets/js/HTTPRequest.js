@@ -109,7 +109,8 @@ function postResource(URL, ResourceName, Parameter, ResponseType, AfterFun, Requ
             header： Header name
             value： Header value
     */
-    xhttp.setRequestHeader("Content-type", 'text/' + ResponseType);
+	if (ResponseType!="")
+		xhttp.setRequestHeader("Content-type", 'text/' + ResponseType);
     /*
         xhttp.onreadystatechange = callback;
         @desc：Stores a function to be called automatically each time the readyState property changes
@@ -134,17 +135,18 @@ function postResource(URL, ResourceName, Parameter, ResponseType, AfterFun, Requ
 				403:FORBIDDEN
 				404:PAGE NOT FOUND
         */
-        if (this.readyState == 4 && this.status == 200) 
+        if (this.readyState == 4 && (this.status == 200 ||　this.status == 201)) 
 		{
             var str = this.response;
-            /*
+            //alert(str);
+			/*
                 eval(string)
                 @desc： Convert string to JavaScript function code for execution
             */
 			eval(AfterFun)(str);
 			return str;
         }
-		else if(this.readyState == 4 && this.status != 200)
+		else if(this.readyState == 4 && (this.status != 200　|| this.status != 201))
 		{
 			retValue(this.response);
 		}  
@@ -295,4 +297,39 @@ function deleteResource(URL, ResourceName, Parameter, AfterFun) {
         @desc： Send a request to the specified server path
     */
     xhttp.send();
+}
+
+//Check data response is complete or error
+function retValue(str){
+	var id="", resType="", err="", severity="";	
+	if(ResponseType=="json")
+	{
+		var obj= JSON.parse(str);
+		id= obj.id? obj.id :"";
+		resType= obj.resourceType? obj.resourceType : "";
+		err= obj.issue? obj.issue[0].diagnostics : "";
+		severity= obj.issue? obj.issue[0].severity : "";
+	}
+	else if(ResponseType=="xml")
+	{
+		if(str.includes("OperationOutcome"))
+		{
+			resType= "OperationOutcome";
+			var temp= str.split('diagnostics value=')[1];  //y.nodeValue; 
+			err= temp.split('"')[1];
+		}
+		else
+		{
+			var temp= str.split('id value=')[1];  //y.nodeValue; 
+			id= temp.split('"')[1];
+		}
+	}
+	
+	if(resType=="OperationOutcome" && severity=="information")
+		alert('Finished!\n' + err);
+	else if(resType=="OperationOutcome")
+		alert('Error!\n' + err);
+	else
+		alert('Finished!\nFHIR Resource ID: ' + id);
+	
 }
