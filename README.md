@@ -3,10 +3,10 @@
 
 ## Introduction
 
-This page outlines how to use the FHIR Endpoint to perform basic CRUD (Create/Read/Update/Delete) Operations.
+This tutorial is designed for FHIR beginners wishing to become familiarised with the **basics of FHIR**. In this tutorial, we will walk through the basic **CRUD operations**. CRUD stands for **Create, Read, Update & Delete**. These are the four main actions that you will use to interact with the FHIR resources within a FHIR server. Understanding these four operations is essential to working with any **RESTful** service which a FHIR server implementat of. REST stands for 'Representational state transfer' and RESTFul just means a system that conforms to the constraints of REST. You don't need to know any more about REST at this stage for the tutorial but if you want more on REST take a look at this page, [Representational state transfer (REST)](https://en.wikipedia.org/wiki/Representational_state_transfer).
 
-I’m going to share a step-by-step how this system works:
-* User: How to use the FHIR CRUD system ([Demo](http://203.64.84.150:51888/user4/fhirproj/CRUD/html/Create.html))
+I’m going to share a step-by-step how to use the FHIR Endpoint to perform basic CRUD (Create/Read/Update/Delete) Operations:
+* User: How to use the FHIR CRUD system ([Demo](https://tzfhir.ml/system/fhir_crud/html/Create.html))
 * Developer: How to use Javascript XMLHttpRequest to perform FHIR CRUD Operations ([Source Code](https://github.com/victoriatjia/FHIR_CRUD))
 
 -----------------------------
