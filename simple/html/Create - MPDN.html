@@ -55,7 +55,7 @@
 				<td rowspan="4">
 					Content
 					<textarea id="resourceContent" required placeholder="Textarea" rows="15"></textarea><br>
-					<button onclick="submitFormMPDN()">Submit</button>
+					<button onclick="mpdnGetToken()">Submit</button>
 				</td>
 			</tr>			
 			<tr>			
@@ -108,52 +108,69 @@
 				otherTextbox.value= "";
 			}
 		}
-		
-function submitFormMPDN(){
-	const myHeaders = new Headers();
-	myHeaders.append("X-GLOBAL-KEY", "2991ed5a45b05af73c5abdb510a8eca3a9d4dcfeebca5b92bb0529baa5e0537e");
-	myHeaders.append("X-USER-KEY", "f23f42d0e90442a46bd590d77d827df8caa70976f33d975d41dd41918e89836d");
-	 
-	const formdata = new FormData();
-	formdata.append("token", "8f59691608a9dbf49f97fd77049664c3");
-	formdata.append("ktp", "3578054304890012");
-	formdata.append("tanggal_lahir", "1989-04-03");
-	formdata.append("warganegara", "WNI");
-	formdata.append("nama", "Khadijah Humaira");
-	formdata.append("menikah", "0");
-	formdata.append("umur", "26");
-	formdata.append("hamil_ke", "1");
-	formdata.append("usia_kehamilan", "7");
-	formdata.append("sebab_kematian", "Complications of anaesthesia during labour and delivery");
-	formdata.append("group_sebab", "G6");
-	formdata.append("icd_sebab", "O74");
-	formdata.append("alamat_ktp", "35.78.05.0000");
-	formdata.append("alamat_sekarang", "35.78.11.1004");
-	formdata.append("alamat_mukim", "35.78.11.1004");
-	formdata.append("status_mukim", "true");
-	formdata.append("sesuai_ktp", "false");
-	formdata.append("sesuai_ktp2", "false");
-	formdata.append("tanggal_meninggal", "2021-01-01");
-	formdata.append("tempat_meninggal", "Rumah Sakit");
-	formdata.append("faskes_mati", "3578016");
-	formdata.append("nama_tempat", "RSUD Dr. Soetomo");
-	formdata.append("masa", "HAMIL");
-	formdata.append("selain_ktp", "");
-	formdata.append("nomor_selain", "");
-	formdata.append("rujukan", "false");
-	 
-	const requestOptions = {
-	  method: "POST",
-	  headers: myHeaders,
-	  body: formdata,
-	  redirect: "follow"
-	};
-	 
-	fetch("https://demompdn.kemkes.go.id/api/mpdn/ibu/lapor", requestOptions)
-	  .then((response) => alert("response: " + response.text()))
-	  .then((result) => alert("result: " + result))
-	  .catch((error) => alert("error: " + error));
-}
+				
+		function submitFormMPDN(){
+			const myHeaders = new Headers();
+			myHeaders.append("X-GLOBAL-KEY", "2991ed5a45b05af73c5abdb510a8eca3a9d4dcfeebca5b92bb0529baa5e0537e");
+			myHeaders.append("X-USER-KEY", "f23f42d0e90442a46bd590d77d827df8caa70976f33d975d41dd41918e89836d");
+			 
+			const formdata = new FormData();
+			formdata.append("token", "8f59691608a9dbf49f97fd77049664c3");
+			formdata.append("ktp", "3578054304890012");
+			formdata.append("tanggal_lahir", "1989-04-03");
+			formdata.append("warganegara", "WNI");
+			formdata.append("nama", "Khadijah Humaira");
+			formdata.append("menikah", "0");
+			formdata.append("umur", "26");
+			formdata.append("hamil_ke", "1");
+			formdata.append("usia_kehamilan", "7");
+			formdata.append("sebab_kematian", "Complications of anaesthesia during labour and delivery");
+			formdata.append("group_sebab", "G6");
+			formdata.append("icd_sebab", "O74");
+			formdata.append("alamat_ktp", "35.78.05.0000");
+			formdata.append("alamat_sekarang", "35.78.11.1004");
+			formdata.append("alamat_mukim", "35.78.11.1004");
+			formdata.append("status_mukim", "true");
+			formdata.append("sesuai_ktp", "false");
+			formdata.append("sesuai_ktp2", "false");
+			formdata.append("tanggal_meninggal", "2021-01-01");
+			formdata.append("tempat_meninggal", "Rumah Sakit");
+			formdata.append("faskes_mati", "3578016");
+			formdata.append("nama_tempat", "RSUD Dr. Soetomo");
+			formdata.append("masa", "HAMIL");
+			formdata.append("selain_ktp", "");
+			formdata.append("nomor_selain", "");
+			formdata.append("rujukan", "false");
+			 
+			const requestOptions = {
+			  method: "POST",
+			  headers: myHeaders,
+			  body: formdata,
+			  redirect: "follow"
+			};
+			 
+			fetch("https://demompdn.kemkes.go.id/api/mpdn/ibu/lapor", requestOptions)
+			  .then((response) => alert("response: " + response.text()))
+			  .then((result) => alert("result: " + result))
+			  .catch((error) => alert("error: " + error));
+		}
+
+
+		function mpdnGetToken(){
+			const myHeaders = new Headers();
+			myHeaders.append("X-GLOBAL-KEY", "2991ed5a45b05af73c5abdb510a8eca3a9d4dcfeebca5b92bb0529baa5e0537e");
+			myHeaders.append("X-USER-KEY", "f23f42d0e90442a46bd590d77d827df8caa70976f33d975d41dd41918e89836d");
+			
+			const requestOptions = {
+			  method: "GET",
+			  headers: myHeaders
+			};
+			 
+			fetch("https://demompdn.kemkes.go.id/api/mpdn/ibu/token/baru", requestOptions)
+			  .then((response) => alert("response: " + response.text()))
+			  .then((result) => alert("result: " + result))
+			  .catch((error) => alert("error: " + error));
+		}
 
 		function submitForm() {
 			FHIRURL = document.getElementById("FHIRServer").value;
