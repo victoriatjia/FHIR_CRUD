@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- META DATA -->
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+		
+		<!-- FAVICON -->
+		<link rel="shortcut icon" type="image/png" href="../assets/img/yourlogo2.png" />
+
+		<!-- TITLE -->
+		<title>Vlix – FHIR CRUD - Create</title>
+
+		<!-- STYLE CSS -->
+		<link href="../assets/css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!-- HEADER -->
+		<header class="site-header">
+			<div class="inner-wrap">
+				<div class="navbar-brand-wpz">
+					<font size="10">FHIR CRUD</font>
+				</div>
+			</div>
+				
+			<nav class="main-navbar" role="navigation" style="">
+				<div class="inner-wrap">
+					<div id="navbar-main">
+						<div class="menu-main-container">
+							<ul id="menu-main-1" class="navbar-wpz dropdown sf-menu sf-js-enabled sf-arrows">
+								<li class="current-menu-item"><a href="Create.html">Create</a></li>
+								<li><a href="Read.html">Read</a></li>
+								<li><a href="Update.html">Update</a></li>
+								<li><a href="Delete.html">Delete</a></li>
+							</ul>
+						</div>
+						
+					</div><!-- #navbar-main -->
+				</div><!-- ./inner-wrap -->
+			</nav>
+		</header>
+		<!-- End HEADER -->
+		
+		<!-- CONTENT -->
+		<table>
+			 <colgroup>
+				<col class="width30p" />
+				<col class="width70p" />
+			</colgroup>
+			<tr>
+				<td>FHIR Server URL<br>
+					<input id="FHIRServer" class="form-control mb-4" type="text">
+				</td>
+				<td rowspan="4">
+					Content
+					<textarea id="resourceContent" required placeholder="Textarea" rows="15"></textarea><br>
+					<button onclick="submitFormMPDN()">Submit</button>
+				</td>
+			</tr>			
+			<tr>			
+				<td>
+					Resource Type<br>
+					<select id="resourceType" onchange="checkSelectedOption()" data-bs-placeholder="Select Resource Type"></select>
+					<input id="otherResourceType" placeholder="Input FHIR Resource Type" type="text" style="display:block;">
+				</td>
+			</tr>			
+			<tr>			
+				<td>ID<br>
+					<input id="resourceID" placeholder="(Optional)" type="text">
+				</td>
+			</tr>			
+			<tr>			
+				<td>Content Format<br>
+					<input type="radio" name="content-type" value="json" checked>
+						<span>JSON</span>
+					<input type="radio" name="content-type" value="xml">
+						<span>XML</span>
+				</td>
+			</tr>
+		</table>				
+		<!-- END CONTENT -->
+		
+		<!-- JQUERY JS-->
+		<script src="../assets/js/jquery.min.js"></script>
+		
+		<!-- HTTPRequest JS-->
+		<script src="../assets/js/HTTPRequest.js"></script>
+		
+		<!-- Setting JS-->
+		<script src="../assets/js/setting.js"></script>
+		
+		<script>
+		function checkSelectedOption()
+		{
+			var ddl = document.getElementById("resourceType");
+			var resourceType = ddl.options[ddl.selectedIndex];
+			var otherTextbox= document.getElementById("otherResourceType");
+			
+			//Check if selected resource type is "... Other resources"
+			if (resourceType.value == 0)
+			{
+				otherTextbox.style.display= "block";
+			}
+			else
+			{
+				otherTextbox.style.display= "none";
+				otherTextbox.value= "";
+			}
+		}
+		
+function submitFormMPDN(){
+	const myHeaders = new Headers();
+	myHeaders.append("X-GLOBAL-KEY", "2991ed5a45b05af73c5abdb510a8eca3a9d4dcfeebca5b92bb0529baa5e0537e");
+	myHeaders.append("X-USER-KEY", "f23f42d0e90442a46bd590d77d827df8caa70976f33d975d41dd41918e89836d");
+	 
+	const formdata = new FormData();
+	formdata.append("token", "8f59691608a9dbf49f97fd77049664c3");
+	formdata.append("ktp", "3578054304890012");
+	formdata.append("tanggal_lahir", "1989-04-03");
+	formdata.append("warganegara", "WNI");
+	formdata.append("nama", "Khadijah Humaira");
+	formdata.append("menikah", "0");
+	formdata.append("umur", "26");
+	formdata.append("hamil_ke", "1");
+	formdata.append("usia_kehamilan", "7");
+	formdata.append("sebab_kematian", "Complications of anaesthesia during labour and delivery");
+	formdata.append("group_sebab", "G6");
+	formdata.append("icd_sebab", "O74");
+	formdata.append("alamat_ktp", "35.78.05.0000");
+	formdata.append("alamat_sekarang", "35.78.11.1004");
+	formdata.append("alamat_mukim", "35.78.11.1004");
+	formdata.append("status_mukim", "true");
+	formdata.append("sesuai_ktp", "false");
+	formdata.append("sesuai_ktp2", "false");
+	formdata.append("tanggal_meninggal", "2021-01-01");
+	formdata.append("tempat_meninggal", "Rumah Sakit");
+	formdata.append("faskes_mati", "3578016");
+	formdata.append("nama_tempat", "RSUD Dr. Soetomo");
+	formdata.append("masa", "HAMIL");
+	formdata.append("selain_ktp", "");
+	formdata.append("nomor_selain", "");
+	formdata.append("rujukan", "false");
+	 
+	const requestOptions = {
+	  method: "POST",
+	  headers: myHeaders,
+	  body: formdata,
+	  redirect: "follow"
+	};
+	 
+	fetch("https://demompdn.kemkes.go.id/api/mpdn/ibu/lapor", requestOptions)
+	  .then((response) => alert("response: " + response.text()))
+	  .then((result) => alert("result: " + result))
+	  .catch((error) => alert("error: " + error));
+}
+
+		function submitForm() {
+			FHIRURL = document.getElementById("FHIRServer").value;
+			var ddl = document.getElementById("resourceType");
+			var resourceType = ddl.options[ddl.selectedIndex];
+			
+			//Check if selected resource type is "... Other resources"
+			if (resourceType.value == 0)
+			{
+				//Get the "other resource type" textbox value
+				resourceType= document.getElementById("otherResourceType").value;
+			}
+			else
+			{
+				//Get the dropdownlist value
+				resourceType= resourceType.text;
+			}
+			
+			var resourceID= document.getElementById("resourceID").value;
+			var resourceContent= document.getElementById("resourceContent").value;
+			ResponseType= document.querySelector('input[name="content-type"]:checked').value;
+			
+			if(resourceID == "")
+			{
+				//METHOD: POST -> FHIR Resource ID will be generated based on sequence on the FHIR Server
+				postResource(FHIRURL, resourceType, "", ResponseType, "retValue", resourceContent);
+			}
+			else
+			{
+				//METHOD: PUT -> When user want to customize the FHIR Resource ID
+				putResource(FHIRURL, resourceType, "/" + resourceID, ResponseType, "retValue", resourceContent);
+			}
+		}
+		</script>
+	</body>
+</html>
