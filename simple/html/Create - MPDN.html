@@ -113,7 +113,9 @@
 			const myHeaders = new Headers();
 			myHeaders.append("X-GLOBAL-KEY", "2991ed5a45b05af73c5abdb510a8eca3a9d4dcfeebca5b92bb0529baa5e0537e");
 			myHeaders.append("X-USER-KEY", "f23f42d0e90442a46bd590d77d827df8caa70976f33d975d41dd41918e89836d");
-			 
+			myHeaders.append("Access-Control-Allow-Origin", "*");
+			myHeaders.append("Access-Control-Allow-Headers", "X-Requested-With");
+			
 			const formdata = new FormData();
 			formdata.append("token", "8f59691608a9dbf49f97fd77049664c3");
 			formdata.append("ktp", "3578054304890012");
