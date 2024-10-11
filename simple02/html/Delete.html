@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- META DATA -->
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+		
+		<!-- FAVICON -->
+		<link rel="shortcut icon" type="image/png" href="../assets/img/yourlogo2.png" />
+
+		<!-- TITLE -->
+		<title>Vlix – FHIR CRUD - Delete</title>
+
+		<!-- STYLE CSS -->
+		<link href="../assets/css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!-- HEADER -->
+		<header class="site-header">
+			<div class="inner-wrap">
+				<div class="navbar-brand-wpz">
+					<font size="10">FHIR CRUD</font>
+				</div>
+			</div>
+				
+			<nav class="main-navbar" role="navigation" style="">
+				<div class="inner-wrap">
+					<div id="navbar-main">
+						<div class="menu-main-container">
+							<ul id="menu-main-1" class="navbar-wpz dropdown sf-menu sf-js-enabled sf-arrows">
+								<li><a href="Create.html">Create</a></li>
+								<li><a href="Read.html">Read</a></li>
+								<li><a href="Update.html">Update</a></li>
+								<li class="current-menu-item"><a href="Delete.html">Delete</a></li>
+							</ul>
+						</div>
+						
+					</div><!-- #navbar-main -->
+				</div><!-- ./inner-wrap -->
+			</nav>
+		</header>
+		<!-- End HEADER -->
+		
+		<!-- CONTENT -->
+		<table>
+			<colgroup>
+				<col class="width30p" />
+				<col class="seven" />
+			</colgroup>
+			<tr>
+				<td>FHIR Server URL<br>
+					<input id="FHIRServer" class="form-control mb-4" type="text">
+				</td>
+			</tr>			
+			<tr>			
+				<td>
+					Resource Type<br>
+					<select id="resourceType" onchange="checkSelectedOption()" data-bs-placeholder="Select Resource Type"></select>
+					<input id="otherResourceType" placeholder="Input FHIR Resource Type" type="text" style="display:block;">
+				</td>
+			</tr>			
+			<tr>			
+				<td>ID<br>
+					<input id="resourceID" type="text">
+				</td>
+			</tr>	
+			<tr>
+				<td rowspan="4">
+					<button onclick="submitForm()">Submit</button>
+				</td>
+			</tr>
+		</table>				
+		<!-- END CONTENT -->
+		
+		<!-- JQUERY JS-->
+		<script src="../assets/js/jquery.min.js"></script>
+		
+		<!-- HTTPRequest JS-->
+		<script src="../assets/js/HTTPRequest.js"></script>
+		
+		<!-- Setting JS-->
+		<script src="../assets/js/setting.js"></script>
+		
+		<script>
+		function checkSelectedOption()
+		{
+			var ddl = document.getElementById("resourceType");
+			var resourceType = ddl.options[ddl.selectedIndex];
+			var otherTextbox= document.getElementById("otherResourceType");
+			
+			//Check if selected resource type is "... Other resources"
+			if (resourceType.value == 0)
+			{
+				otherTextbox.style.display= "block";
+			}
+			else
+			{
+				otherTextbox.style.display= "none";
+				otherTextbox.value= "";
+			}
+		}
+		
+		function submitForm()
+		{
+			FHIRURL = document.getElementById("FHIRServer").value;
+			var ddl = document.getElementById("resourceType");
+			var resourceType = ddl.options[ddl.selectedIndex];
+			
+			//Check if selected resource type is "... Other resources"
+			if (resourceType.value == 0)
+			{
+				//Get the "other resource type" textbox value
+				resourceType= document.getElementById("otherResourceType").value;
+			}
+			else
+			{
+				//Get the dropdownlist value
+				resourceType= resourceType.text;
+			}
+			
+			var resourceID= document.getElementById("resourceID").value;
+			ResponseType= "json";
+			
+			if(resourceID != "")
+			{
+				deleteResource(FHIRURL, resourceType, "/" + resourceID, "retValue");
+			}
+			else
+			{
+				alert("Please input the Resource ID");
+			}
+		}
+		</script>
+	</body>
+</html>
